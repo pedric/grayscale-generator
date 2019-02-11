@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "blendid": "^4.4.3"
+  },
+  "name": "js-color-picker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

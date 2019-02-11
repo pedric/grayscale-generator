@@ -1,0 +1,25 @@
+.monitors {
+
+  &__cube {
+    display: block;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.text-monitors {
+  margin-top: 5%;
+  padding: 2em;
+
+    .text-monitors__cube--black {
+      color: black ;
+    }
+
+    .text-monitors__cube--white {
+      color: white;
+    }
+}

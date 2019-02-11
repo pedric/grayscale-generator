@@ -1,0 +1,21 @@
+.inputs {
+  margin-top: 5%;
+  margin-left: 5%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+
+  .inputs__input-wrapper {
+    margin: 10px 0;
+  }
+
+  label {
+    display: block;
+    width: 100%;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+  }
+}
