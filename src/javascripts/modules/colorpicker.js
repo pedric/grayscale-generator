@@ -15,18 +15,24 @@ export default class ColorPicker {
         this.setReferenceFromTextInput(event)
       })
 
-        this.colorInput.addEventListener('change', () => {
-          this.setReferenceFromColorInput(event)
+        'change mousedown mouseup keypress'.split(' ').forEach( (event) => {
+          this.colorInput.addEventListener(event, () => {
+            this.setReferenceFromColorInput()
+          })
+        })
+
+        window.addEventListener('load', () => {
+          this.setReferenceFromColorInput()
         })
 
       for (let i = 0; i < this.rangeInputs.length; i++) {
         this.rangeInputs[i].addEventListener('input', () => {
-          this.setGrayscale(event)
+          this.setGrayscale()
         })
       }
   }
 
-  setGrayscale (event) {
+  setGrayscale () {
 
     for (let i = 0; i < this.monitors.length; i++) {
       let divider = i + 1;
