@@ -10,13 +10,12 @@ export default class ColorPicker {
     this.blue = document.getElementById('blue')
     this.reference_monitor = document.getElementById('reference_monitor')
 
-    console.log(this.rangeInputs)
 
       this.textInput.addEventListener('input', () => {
         this.setReferenceFromTextInput(event)
       })
 
-        this.colorInput.addEventListener('input', () => {
+        this.colorInput.addEventListener('change', () => {
           this.setReferenceFromColorInput(event)
         })
 
@@ -46,7 +45,7 @@ export default class ColorPicker {
   }
 
   setReferenceFromColorInput() {
-    this.reference_monitor.style.background = this.colorInput.value
+    this.reference_monitor.style.background = '#' + this.colorInput.value
     this.textInput.value = 0
     this.setMonitorTextColor()
   }
