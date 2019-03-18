@@ -10,7 +10,6 @@ export default class ColorPicker {
     this.blue = document.getElementById('blue')
     this.reference_monitor = document.getElementById('reference_monitor')
 
-
       this.textInput.addEventListener('input', () => {
         this.setReferenceFromTextInput(event)
       })
@@ -38,7 +37,7 @@ export default class ColorPicker {
       let divider = i + 1;
       let color = 'rgb(' + Math.floor(this.red.value / divider) + ',' + Math.floor(this.green.value / divider )+ ',' + Math.floor(this.blue.value / divider) + ')'
       this.monitors[i].style.background = color
-      this.monitors[i].textContent = color
+      this.monitors[i].children[0].textContent = color
     }
 
     this.setMonitorTextColor()
@@ -60,6 +59,7 @@ export default class ColorPicker {
     for (let i = 0; i < this.monitors.length; i++) {
       let referenceColor = this.reference_monitor.style.background
       this.monitors[i].style.color = referenceColor
+      this.monitors[i].children[1].style.background = referenceColor
     }
   }
 }
