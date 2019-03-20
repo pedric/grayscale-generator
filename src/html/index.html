@@ -15,7 +15,7 @@
       <!-- <input class="jscolor" value="ab2567"> -->
         {% for item in input_items %}
         <div class="inputs__input-wrapper">
-          <label for="{{item.name}}">{{item.name}}</label>
+          <label for="{{item.name}}">{{item.label}}</label>
           <input
           class="{% if item.class %}{{ item.class}}{% endif %} input input--{{item.name}}"
           id="{{item.name}}"

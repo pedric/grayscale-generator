@@ -20,9 +20,9 @@ export default class ColorPicker {
           })
         })
 
-        window.addEventListener('load', () => {
-          this.setReferenceFromColorInput()
-        })
+        // window.addEventListener('load', () => {
+        //   this.setReferenceFromColorInput()
+        // })
 
       for (let i = 0; i < this.rangeInputs.length; i++) {
         this.rangeInputs[i].addEventListener('input', () => {
@@ -32,14 +32,12 @@ export default class ColorPicker {
   }
 
   setGrayscale () {
-
     for (let i = 0; i < this.monitors.length; i++) {
       let divider = i + 1;
       let color = 'rgb(' + Math.floor(this.red.value / divider) + ',' + Math.floor(this.green.value / divider )+ ',' + Math.floor(this.blue.value / divider) + ')'
       this.monitors[i].style.background = color
       this.monitors[i].children[0].textContent = color
     }
-
     this.setMonitorTextColor()
   }
 
