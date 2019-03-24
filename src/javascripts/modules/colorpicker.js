@@ -10,7 +10,8 @@ export default class ColorPicker {
     this.blue = document.getElementById('blue')
     this.reference_monitor = document.getElementById('reference_monitor')
     this.particlesWrapper = document.getElementById('particles-js')
-
+    this.gradientWrapper = document.getElementById('gradient')
+    this.buttons = el.querySelectorAll('.inputs__input-wrapper--buttons .btn')
       this.textInput.addEventListener('input', () => {
         this.setReferenceFromTextInput(event)
       })
@@ -21,11 +22,15 @@ export default class ColorPicker {
           })
         })
 
-        this.particles()
-
       for (let i = 0; i < this.rangeInputs.length; i++) {
         this.rangeInputs[i].addEventListener('input', () => {
           this.setGrayscale()
+        })
+      }
+
+      for (let i = 0; i < this.buttons.length; i++) {
+        this.buttons[i].addEventListener('click', () => {
+          this.toggleDisplay(event)
         })
       }
   }
@@ -39,6 +44,7 @@ export default class ColorPicker {
     }
     this.setMonitorTextColor()
     this.particles()
+    this.gradient()
   }
 
   setReferenceFromTextInput() {
@@ -46,6 +52,7 @@ export default class ColorPicker {
     this.colorInput.value = 0
     this.setMonitorTextColor()
     this.particles(this.textInput.value)
+    this.gradient()
   }
 
   setReferenceFromColorInput() {
@@ -53,6 +60,7 @@ export default class ColorPicker {
     this.textInput.value = 0
     this.setMonitorTextColor()
     this.particles(this.colorInput.value)
+    this.gradient()
   }
 
   setMonitorTextColor() {
@@ -63,6 +71,32 @@ export default class ColorPicker {
     }
   }
 
+  toggleDisplay(event) {
+    let activeDisplay
+    event.target.classList.add('active')
+    console.log(event.target)
+    event.target.classList.contains('btn--block') ? activeDisplay = 'block' : ''
+    event.target.classList.contains('btn--particles')? activeDisplay = 'particles' : ''
+    event.target.classList.contains('btn--gradient')? activeDisplay = 'gradient' : ''
+
+    for (let i = 0; i < this.buttons.length; i++) {
+
+      
+      this.buttons[i].addEventListener('click', () => {
+        this.toggleDisplay(event)
+      })
+    }
+
+    if(event.target.classList.contains('btn--block')) { console.log('block') }
+  }
+
+  gradient() {
+    let color = this.reference_monitor.style.background
+    // let reference = this.reference_monitor.style.background
+    let gray = this.rgb2hex(Math.floor(this.red.value), Math.floor(this.green.value), Math.floor(this.blue.value))
+    this.gradientWrapper.style.backgroundImage =  'linear-gradient(to right, '+color+',' +gray+')'
+  }
+
   rgb2hex(red, green, blue) {
         var rgb = blue | (green << 8) | (red << 16);
         return '#' + (0x1000000 + rgb).toString(16).slice(1)
@@ -70,7 +104,7 @@ export default class ColorPicker {
 
   particles(background) {
 
-    this.particlesWrapper.style.background = background
+    background ? this.particlesWrapper.style.background = background : '' ;
     let gray1 = this.rgb2hex(Math.floor(this.red.value), Math.floor(this.green.value), Math.floor(this.blue.value))
     let gray2 = this.rgb2hex(Math.floor(this.red.value / 2), Math.floor(this.green.value / 2), Math.floor(this.blue.value / 2))
     let gray3 = this.rgb2hex(Math.floor(this.red.value / 3), Math.floor(this.green.value / 3), Math.floor(this.blue.value / 3))
