@@ -9,6 +9,7 @@ export default class ColorPicker {
     this.green = document.getElementById('green')
     this.blue = document.getElementById('blue')
     this.reference_monitor = document.getElementById('reference_monitor')
+    this.particlesWrapper = document.getElementById('particles-js')
 
       this.textInput.addEventListener('input', () => {
         this.setReferenceFromTextInput(event)
@@ -20,9 +21,7 @@ export default class ColorPicker {
           })
         })
 
-        // window.addEventListener('load', () => {
-        //   this.setReferenceFromColorInput()
-        // })
+        this.particles()
 
       for (let i = 0; i < this.rangeInputs.length; i++) {
         this.rangeInputs[i].addEventListener('input', () => {
@@ -39,18 +38,21 @@ export default class ColorPicker {
       this.monitors[i].children[0].textContent = color
     }
     this.setMonitorTextColor()
+    this.particles()
   }
 
   setReferenceFromTextInput() {
     this.reference_monitor.style.background = this.textInput.value
     this.colorInput.value = 0
     this.setMonitorTextColor()
+    this.particles(this.textInput.value)
   }
 
   setReferenceFromColorInput() {
     this.reference_monitor.style.background = '#' + this.colorInput.value
     this.textInput.value = 0
     this.setMonitorTextColor()
+    this.particles(this.colorInput.value)
   }
 
   setMonitorTextColor() {
@@ -59,5 +61,132 @@ export default class ColorPicker {
       this.monitors[i].style.color = referenceColor
       this.monitors[i].children[1].style.background = referenceColor
     }
+  }
+
+  rgb2hex(red, green, blue) {
+        var rgb = blue | (green << 8) | (red << 16);
+        return '#' + (0x1000000 + rgb).toString(16).slice(1)
+  }
+
+  particles(background) {
+
+    this.particlesWrapper.style.background = background
+    let gray1 = this.rgb2hex(Math.floor(this.red.value), Math.floor(this.green.value), Math.floor(this.blue.value))
+    let gray2 = this.rgb2hex(Math.floor(this.red.value / 2), Math.floor(this.green.value / 2), Math.floor(this.blue.value / 2))
+    let gray3 = this.rgb2hex(Math.floor(this.red.value / 3), Math.floor(this.green.value / 3), Math.floor(this.blue.value / 3))
+
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 52,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": [
+            gray1,
+            gray2,
+            gray3]
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 100,
+            "height": 100
+          }
+        },
+        "opacity": {
+          "value": 0.9,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 94.69771699587272,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": false,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 6,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": false,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 400,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
   }
 }
