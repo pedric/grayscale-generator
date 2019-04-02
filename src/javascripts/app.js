@@ -1,3 +1,4 @@
+import './particles'
 import './jscolor'
 import './modules'
 
