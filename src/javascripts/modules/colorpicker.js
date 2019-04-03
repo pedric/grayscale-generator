@@ -13,6 +13,8 @@ export default class ColorPicker {
     this.gradientWrapper = document.getElementById('gradient')
     this.buttons = el.querySelectorAll('.inputs__input-wrapper--buttons .btn')
 
+    this.reference_monitor.style.background = '#fff'
+
       this.textInput.addEventListener('input', () => {
         this.setReferenceFromTextInput(event)
       })
@@ -34,12 +36,20 @@ export default class ColorPicker {
           this.toggleDisplay(event)
         })
       }
+  }
 
-      for (let i = 0; i < this.buttons.length; i++) {
-        this.buttons[i].addEventListener('click', () => {
-          this.toggleDisplay(event)
-        })
+  init() {
+      let userHasPickedDisplay = false;
+      for(let i = 0; i < this.buttons.length; i++) {
+        if( this.buttons[i].classList.contains('active') ) {
+            userHasPickedDisplay = true;
+        }
       }
+      if(!userHasPickedDisplay) {
+          this.particlesWrapper.style.display = 'none'
+          this.gradientWrapper.style.display = 'none'
+      }
+
   }
 
   setGrayscale () {
@@ -49,6 +59,7 @@ export default class ColorPicker {
       this.monitors[i].style.background = color
       this.monitors[i].children[0].textContent = color
     }
+    this.init()
     this.setMonitorTextColor()
     this.particles()
     this.gradient()
@@ -115,7 +126,6 @@ export default class ColorPicker {
   }
 
   particles(reference) {
-console.log(this.reference_monitor.style.background)
     // reference == 'color_input' ? this.particlesWrapper.style.backgroundColor = ``this.colorInput.value : this.textInput.value ;
     let color = this.reference_monitor.style.background
     this.particlesWrapper.style.backgroundColor = color

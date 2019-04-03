@@ -10,6 +10,9 @@
       <!-- <input class="jscolor" value="ab2567"> -->
         {% for item in input_items %}
         <div class="inputs__input-wrapper">
+          {% if item.name == 'red' %}
+            <h5>Mix 🎨 👇🏽 </h5>
+          {% endif %}
           <label for="{{item.name}}">{{item.label}}</label>
           <input
           class="{% if item.class %}{{ item.class}}{% endif %} input input--{{item.name}}"
@@ -31,7 +34,7 @@
         {% endfor %}
         <div class="inputs__input-wrapper inputs__input-wrapper--buttons">
           <span class="btn btn--block">block</span>
-          <span class="btn btn--particles">partiklar</span>
+          <span class="btn btn--particles">particles</span>
           <span class="btn btn--gradient">gradient</span>
         </div>
       </div>
